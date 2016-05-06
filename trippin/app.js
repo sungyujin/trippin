@@ -3,12 +3,26 @@ var path = require('path');
 var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
+var session = require('express-session');
 var bodyParser = require('body-parser');
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
+var config = require('./config.json');
 
 var app = express();
+
+app.use(cookieParser());
+app.use(session({
+  key: 'sid',
+  secret: 'secret',
+  resave: false,
+  saveUninitialized: true,
+  cookie: {
+
+    maxAge: 1000 * 60 * 60
+  }
+}));
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -55,6 +69,10 @@ app.use(function(err, req, res, next) {
     error: {}
   });
 });
+
+app.listen(config.port, function () {
+  console.log('server is running at ' + config.port);
+})
 
 
 module.exports = app;
