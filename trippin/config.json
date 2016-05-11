@@ -7,5 +7,12 @@
   "exclude": [
     "node_modules"
   ],
-  "port": 8080
+  "port": 8080,
+  "dbinfo" : {
+    "host"     : "localhost",
+    "user": "root",
+    "database" : "trippin",
+    "connectionLimit": 20,
+    "waitForConnections": false
+  }
 }
